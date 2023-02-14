@@ -14,7 +14,17 @@
     "test": "jest --env=node",
     "build:client": "webpack --watch",
     "server": "nodemon app.js",
-    "start": "rm -rf dist && npm-run-all --parallel build:client server"
+    "start": "rm -rf dist && npm-run-all --parallel build:client server",
+    "lint": "eslint . --fix",
+    "lint:staged": "lint-staged",
+    "prettify": "prettier . --write",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix",
+    "*.{js,jsx,handlebars,json,css,scss,md}": [
+      "prettier --write"
+    ]
   },
   "author": "Financial Times Ltd.",
   "license": "MIT",
@@ -28,10 +38,19 @@
     "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",
     "babel-loader": "^8.2.3",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
     "file-loader": "^6.2.0",
+    "husky": ">=6",
     "jest": "^27.5.1",
+    "lint-staged": "^13.1.2",
     "nodemon": "^2.0.15",
     "npm-run-all": "^4.1.5",
+    "prettier": "2.8.4",
     "sass": "^1.49.9",
     "sass-loader": "^12.6.0",
     "supertest": "^6.2.2",

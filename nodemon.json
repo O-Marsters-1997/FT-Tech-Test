@@ -1,8 +1,5 @@
 {
   "ignoreRoot": [],
-  "watch": [
-    "app.js",
-    "views"
-  ],
+  "watch": ["app.js", "views"],
   "ext": "js jsx json"
 }
