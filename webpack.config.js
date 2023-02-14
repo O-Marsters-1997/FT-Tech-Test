@@ -3,6 +3,7 @@ const path = require("path");
 module.exports = {
   mode: "development",
   devtool: "inline-source-map",
+  // ammended the entry to remove concatenation to maintain absolute paths
   entry: [
     path.resolve(__dirname, "/src/css/styles.scss"),
     path.resolve(__dirname, "/src/js/main.js"),
