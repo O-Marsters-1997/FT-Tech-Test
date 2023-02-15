@@ -20,9 +20,14 @@
     "prettify": "prettier . --write",
     "prepare": "husky install"
   },
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
+  },
   "lint-staged": {
     "*.js": "eslint --fix",
-    "*.{js,jsx,handlebars,json,css,scss,md}": [
+    "*.{js,jsx,json,css,scss,md}": [
       "prettier --write"
     ]
   },
@@ -30,6 +35,7 @@
   "license": "MIT",
   "dependencies": {
     "@financial-times/dotcom-server-react-jsx": "^7.2.4",
+    "axios": "^1.3.3",
     "express": "^4.17.3",
     "express-handlebars": "^6.0.2",
     "sucrase": "^3.28.0"
