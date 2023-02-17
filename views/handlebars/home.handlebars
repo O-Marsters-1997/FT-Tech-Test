@@ -1,9 +1,9 @@
 <h1>{{pageTitle}}</h1>
-<ul class="list">
+<div class="list">
   {{#each content.items}}
-    <div class = "list__wrapper"/>
+    <ul class = "list__wrapper"/>
         <li class = "list__wrapper-name">{{this.basic.name}}</li>
         <li class = "list__wrapper-status">{{this.quote.change1WeekPercent}}</li>
-    </div>
+    </ul>
   {{/each}}
-</ul>
+</div>

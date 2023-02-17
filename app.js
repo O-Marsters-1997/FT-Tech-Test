@@ -1,7 +1,7 @@
 require("sucrase/register"); // subset of babel
 const express = require("express");
 const path = require("path");
-const { BASE_URL, params } = require("./config");
+const { BASE_URL, params, headers } = require("./config");
 const port = process.env.PORT || 3000;
 const { engine } = require("express-handlebars");
 // dotcom-server-react is a tool that enables us to run both handlebars and react in the same app. You don't need to spend time figuring out how it works.
@@ -47,13 +47,18 @@ app.get("/jsx", (req, res) => {
  * START HERE FOR HANDLEBARS TEMPLATING
  */
 
-app.get("/handlebars", async function (req, res) {
-  const fetchData = async () => {
-    const result = await axios.get(`${BASE_URL}?symbols=${params.join(",")}`);
+const fetchData = async (array, config) => {
+  try {
+    const url = `${BASE_URL}?symbols=${array.join(",")}`;
+    const result = await axios.get(url, config);
     return result.data.data;
-  };
-  const data = await fetchData();
+  } catch (err) {
+    console.log(err);
+  }
+};
 
+app.get("/handlebars", async function (req, res) {
+  const data = await fetchData(params, headers);
   // This object is passed to the Handlebars template.
   const templateData = {
     pageTitle: "Home",
@@ -74,4 +79,5 @@ if (process.env.NODE_ENV !== "test") {
 }
 
 // Export the app so that we can test it in `test/app.spec.js`
-module.exports = app;
+// Added extra exports for testing
+module.exports = { subject: app, fetchData, params, headers };
