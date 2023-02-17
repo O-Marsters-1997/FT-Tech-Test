@@ -1,7 +1,9 @@
 const request = require("supertest");
-const { subject, fetchData, params, headers } = require("../app");
+const { subject, fetchData, filterItems, params, headers } = require("../app");
 // moved to separate file to make more reusable
 const countOccurences = require("./testHelpers/app.testHelpers");
+// bringing in the fixture
+const fixture = require("./fixtures/securities-response.json");
 
 describe("Testing the server", () => {
   describe("Testing routes", () => {
@@ -31,12 +33,22 @@ describe("Testing the server", () => {
 
     it("should return only as many items as there are valid indeces for", async () => {
       // setting the final param in the array to be incorrect
-      params[params.length - 1] = "IB.1:IE";
+      const newParams = [...params];
+      newParams[params.length - 1] = "IB.1:IE";
+      const res = await fetchData(newParams, headers);
+      // Hard coding 4 because only 4 of elements in the params are valid so once the filtering has happened there should only be 4 items returned out of the response that are set as data.
+      expect(filterItems(res).length).toBe(4);
+    });
+
+    it("the returned response data should contain all the relavant data that is expected", async () => {
       const res = await request(subject).get("/handlebars");
-      const data = await fetchData(params, headers);
-      // Hard coding 4 because only 4 of elements in the params are valid
-      expect(countOccurences(res)).toEqual(4);
-      expect(data.items.length).toEqual(countOccurences(res));
+      expect(res.status).toEqual(200);
+      const response = await fetchData(params, headers);
+      const data = filterItems(response);
+      // Making sure that in the correct version of the code that there are 5 returned values for the items.
+      expect(data.length).toBe(5);
+      // Making sure that on an example item from the expected data json format has the same properties as the response from my get request
+      expect(Object.keys(data[0])).toEqual(Object.keys(fixture.data.items[0]));
     });
   });
 });

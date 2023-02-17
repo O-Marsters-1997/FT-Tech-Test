@@ -57,16 +57,19 @@ const fetchData = async (array, config) => {
   }
 };
 
-app.get("/handlebars", async function (req, res) {
-  const response = await fetchData(params, headers);
-  // Filtering out invalid search parameters from the returned
-  const data = response.items.filter((item) => {
-    console.log(item.symbolInput);
+const filterItems = (res) => {
+  return res.items.filter((item) => {
     if (!item.basic) {
       console.log(`${item.symbolInput} is an invalid search parameter`);
     }
     return item.basic;
   });
+};
+
+app.get("/handlebars", async function (req, res) {
+  const response = await fetchData(params, headers);
+  // Filtering out invalid search parameters from the returned
+  const data = filterItems(response);
   // This object is passed to the Handlebars template.
   const templateData = {
     pageTitle: "Home",
@@ -88,4 +91,4 @@ if (process.env.NODE_ENV !== "test") {
 
 // Export the app so that we can test it in `test/app.spec.js`
 // Added extra exports for testing
-module.exports = { subject: app, fetchData, params, headers };
+module.exports = { subject: app, fetchData, filterItems, params, headers };
