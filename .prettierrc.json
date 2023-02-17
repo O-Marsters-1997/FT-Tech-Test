@@ -3,5 +3,13 @@
   "useTabs": false,
   "singleQuote": false,
   "trailingComma": "all",
-  "printWidth": 80
+  "printWidth": 80,
+  "overrides": [
+    {
+      "files": "*.handlebars",
+      "options": {
+        "parser": "html"
+      }
+    }
+  ]
 }

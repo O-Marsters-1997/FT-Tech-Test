@@ -1,10 +1,15 @@
-{{! this is a generic layout template, views/handlebars/home.handlebars is the file to work on }}
+{{! this is a generic layout template, views/handlebars/home.handlebars is the
+file to work on }}
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {{! Key SEO metric is to have a description }}
+    <meta name="description" content="Financial times tech test" />
     <title>Financial Times Technical Test</title>
-    {{! these files are created by webpack when you run `npm build` or `npm run start` }}
+    {{! these files are created by webpack when you run `npm build` or `npm run
+    start` }}
     <link rel="stylesheet" href="/dist/css/styles.css" />
     <script src="/dist/js/main.js" defer></script>
   </head>
