@@ -1,4 +1,14 @@
-html {
-  background: #fff;
-  color: #333;
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+// Styles for the list
+.list {
+  display: flex;
+
+  &__wrapper {
+    list-style: none;
+    display: flex;
+  }
 }

@@ -72,7 +72,7 @@ app.get("/handlebars", async function (req, res) {
   const data = filterItems(response);
   // This object is passed to the Handlebars template.
   const templateData = {
-    pageTitle: "Home",
+    pageTitle: "Financial Times",
     content: data,
   };
 
