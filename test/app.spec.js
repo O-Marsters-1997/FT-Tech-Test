@@ -25,7 +25,7 @@ describe("Testing the server", () => {
       expect(res.status).toEqual(200);
       // mocking the fetch request
       const data = await fetchData(params, headers);
-      // Hard coding 5 because the task asks us to input all 5 indeces to get the response
+      // Hard coding 5 because the task asks us to input all 5 indeces to get the response shown.
       expect(countOccurences(res)).toEqual(5);
       // If the length of the items property of the data object comes back as the same length of how many unordered lists there are in the text then we know that the length of the fetchData array parameter controls how many items we can get back from the API.
       expect(data.items.length).toEqual(countOccurences(res));
