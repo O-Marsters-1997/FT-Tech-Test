@@ -37,6 +37,8 @@ function formatValues() {
     ).toString();
     value.innerHTML =
       numValue >= 0 ? `+${roundedInnerHTML}` : `${roundedInnerHTML}`;
+    // dynamic color styles dependendt on value
+    value.classList.add(numValue >= 0 ? "success" : "error");
   });
   formatLabels();
 }

@@ -1,14 +1,44 @@
+// Colour palette
+$background-primary: rgb(253, 241, 230);
+$background-secondary: rgb(38, 42, 51);
+$text-primary: rgb(27, 26, 25);
+$text-secondary: rgb(246, 246, 246);
+$text-success: rgb(141, 166, 45);
+$text-error: rgb(236, 107, 102);
+
+// Units
+$mh: 2em;
+
 * {
   margin: 0;
   box-sizing: border-box;
 }
 
+body {
+  background-color: $background-primary;
+}
+
+h1 {
+  margin: calc($mh / 2);
+}
+
 // Styles for the list
 .list {
   display: flex;
+  margin: $mh;
+  background-color: $background-secondary;
 
   &__wrapper {
     list-style: none;
     display: flex;
+    li {
+      color: $text-secondary;
+      &.success {
+        color: $text-success;
+      }
+      &.error {
+        color: $text-error;
+      }
+    }
   }
 }
