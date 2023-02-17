@@ -58,7 +58,15 @@ const fetchData = async (array, config) => {
 };
 
 app.get("/handlebars", async function (req, res) {
-  const data = await fetchData(params, headers);
+  const response = await fetchData(params, headers);
+  // Filtering out invalid search parameters from the returned
+  const data = response.items.filter((item) => {
+    console.log(item.symbolInput);
+    if (!item.basic) {
+      console.log(`${item.symbolInput} is an invalid search parameter`);
+    }
+    return item.basic;
+  });
   // This object is passed to the Handlebars template.
   const templateData = {
     pageTitle: "Home",
